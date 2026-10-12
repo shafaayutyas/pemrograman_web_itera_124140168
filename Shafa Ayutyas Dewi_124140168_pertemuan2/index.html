@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Mahasiswa - Pusat Kendali Harian</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== HERO: salam, jam, cuaca, kutipan ===== -->
+  <header class="hero">
+    <div class="hero-main">
+      <p class="eyebrow" id="tanggal">&nbsp;</p>
+      <h1><span id="salam">Halo</span>, <span id="nama-pengguna">Mahasiswa</span></h1>
+      <p class="clock" id="jam" aria-live="off">--.--.--</p>
+    </div>
+
+    <div class="hero-cards">
+      <article class="mini-card" aria-label="Cuaca kampus">
+        <h2>Cuaca kampus</h2>
+        <div id="cuaca" class="mini-body">
+          <p class="muted">Memuat cuaca...</p>
+        </div>
+      </article>
+
+      <article class="mini-card" aria-label="Kutipan hari ini">
+        <h2>Kutipan hari ini</h2>
+        <div id="kutipan" class="mini-body">
+          <p class="muted">Memuat kutipan...</p>
+        </div>
+      </article>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ===== Ringkasan ===== -->
+    <section class="stats" aria-label="Ringkasan">
+      <div class="stat">
+        <span class="stat-num" id="stat-aktif">0</span>
+        <span class="stat-label">Tugas aktif</span>
+      </div>
+      <div class="stat stat-late">
+        <span class="stat-num" id="stat-terlambat">0</span>
+        <span class="stat-label">Lewat tenggat</span>
+      </div>
+      <div class="stat stat-class">
+        <span class="stat-num" id="stat-kuliah">0</span>
+        <span class="stat-label">Kuliah hari ini</span>
+      </div>
+    </section>
+
+    <div class="dashboard">
+
+      <!-- ===== KOLOM KIRI: TUGAS ===== -->
+      <section class="card" id="card-tugas">
+        <div class="card-head">
+          <h2>Tugas &amp; tenggat</h2>
+          <span class="badge" id="progres-teks">0 / 0 selesai</span>
+        </div>
+        <div class="progress" aria-hidden="true"><div class="progress-bar" id="progres-bar"></div></div>
+
+        <form id="form-tugas" novalidate>
+          <div class="form-grid">
+            <div class="field span-2">
+              <label for="tugas-judul">Judul tugas</label>
+              <input type="text" id="tugas-judul" name="judul" placeholder="Contoh: Laporan praktikum Pemrograman Web" autocomplete="off">
+              <p class="error-text" data-error="judul" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="tugas-matkul">Mata kuliah</label>
+              <input type="text" id="tugas-matkul" name="matkul" placeholder="Opsional" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="tugas-deadline">Tenggat</label>
+              <input type="date" id="tugas-deadline" name="deadline">
+            </div>
+            <div class="field">
+              <label for="tugas-prioritas">Prioritas</label>
+              <select id="tugas-prioritas" name="prioritas">
+                <option value="rendah">Rendah</option>
+                <option value="sedang" selected>Sedang</option>
+                <option value="tinggi">Tinggi</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="btn-simpan-tugas">Tambah tugas</button>
+            <button type="button" class="btn btn-ghost" id="btn-batal-tugas" hidden>Batal</button>
+          </div>
+        </form>
+
+        <div class="filters" role="group" aria-label="Filter tugas">
+          <button type="button" class="filter active" data-filter="semua">Semua</button>
+          <button type="button" class="filter" data-filter="aktif">Aktif</button>
+          <button type="button" class="filter" data-filter="selesai">Selesai</button>
+        </div>
+
+        <ul id="daftar-tugas" class="task-list"></ul>
+      </section>
+
+      <!-- ===== KOLOM KANAN: JADWAL + CATATAN ===== -->
+      <div class="side">
+
+        <section class="card" id="card-jadwal">
+          <div class="card-head">
+            <h2>Jadwal kuliah</h2>
+          </div>
+
+          <form id="form-jadwal" novalidate>
+            <div class="form-grid">
+              <div class="field span-2">
+                <label for="jadwal-matkul">Mata kuliah</label>
+                <input type="text" id="jadwal-matkul" name="matkul" placeholder="Contoh: Basis Data" autocomplete="off">
+                <p class="error-text" data-error="matkul" role="alert"></p>
+              </div>
+              <div class="field">
+                <label for="jadwal-hari">Hari</label>
+                <select id="jadwal-hari" name="hari"></select>
+              </div>
+              <div class="field">
+                <label for="jadwal-ruang">Ruang</label>
+                <input type="text" id="jadwal-ruang" name="ruang" placeholder="Opsional" autocomplete="off">
+              </div>
+              <div class="field">
+                <label for="jadwal-mulai">Mulai</label>
+                <input type="time" id="jadwal-mulai" name="mulai">
+                <p class="error-text" data-error="mulai" role="alert"></p>
+              </div>
+              <div class="field">
+                <label for="jadwal-selesai">Selesai</label>
+                <input type="time" id="jadwal-selesai" name="selesai">
+                <p class="error-text" data-error="selesai" role="alert"></p>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary" id="btn-simpan-jadwal">Tambah jadwal</button>
+              <button type="button" class="btn btn-ghost" id="btn-batal-jadwal" hidden>Batal</button>
+            </div>
+          </form>
+
+          <div id="daftar-jadwal" class="schedule"></div>
+        </section>
+
+        <section class="card" id="card-catatan">
+          <div class="card-head">
+            <h2>Catatan cepat</h2>
+            <span class="muted small" id="status-catatan">Tersimpan otomatis</span>
+          </div>
+          <label for="catatan" class="sr-only">Catatan cepat</label>
+          <textarea id="catatan" rows="5" placeholder="Tulis pengingat, ide skripsi, atau daftar belanja di sini..."></textarea>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    Personal Dashboard &middot; Shafa Ayutyas Dewi &middot; 124140168 &middot; RB
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
