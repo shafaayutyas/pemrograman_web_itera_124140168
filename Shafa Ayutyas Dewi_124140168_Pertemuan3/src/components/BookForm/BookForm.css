@@ -1,0 +1,6 @@
+.book-form { display: grid; gap: .9rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); align-items: start; }
+.book-form .field { display: flex; flex-direction: column; gap: .25rem; }
+.book-form label { font-weight: 600; font-size: .9rem; }
+.book-form input.invalid { border-color: var(--danger); background: #fdf0ef; }
+.book-form .error { color: var(--danger); font-size: .85rem; }
+.book-form .actions { display: flex; gap: .5rem; align-items: end; }
