@@ -1,0 +1,4 @@
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1rem 0 0; }
+.stats div { border: 1px solid var(--line); border-radius: 8px; padding: .8rem 1rem; }
+.stats dt { color: var(--muted); font-size: .9rem; }
+.stats dd { margin: 0; font: 700 2rem Georgia, serif; color: var(--accent); }
