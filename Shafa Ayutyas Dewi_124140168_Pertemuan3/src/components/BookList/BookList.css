@@ -1,0 +1,9 @@
+.book-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.book-item { display: grid; grid-template-columns: 1fr auto auto; gap: 1rem; align-items: center; background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--accent); border-radius: 8px; padding: .8rem 1rem; }
+.book-item h3 { font-size: 1.1rem; }
+.book-item p { margin: 0; color: var(--muted); }
+.book-item .actions { display: flex; gap: .4rem; }
+.badge { font-size: .8rem; padding: .15rem .6rem; border-radius: 99px; background: #e0ecec; }
+.badge-baca { background: #fdebc8; } .badge-beli { background: #e7e0f5; }
+.empty { color: var(--muted); text-align: center; padding: 1.5rem 0; }
+@media (max-width: 560px) { .book-item { grid-template-columns: 1fr; } }
